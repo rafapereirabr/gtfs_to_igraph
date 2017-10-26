@@ -9,7 +9,7 @@ The workflow of the function is as follows:
  - Steps 1 to 3: Identify and merge stops that are closer than a distance threshold (meters). This threshold is set by the user
  - Step 4: Identify transport modes, route and service level for each trip
  - Step 5: Indentify links between stops
- - Step 6: Build igraph
+ - Step 6: Build igraph. As it stants, the script returns a graph weighted by route frequecy
  - Step 7 (optional): the script creates a subdirectory and saves the input files to use in [MuxViz](https://github.com/manlius/muxViz)
 
 
@@ -41,5 +41,8 @@ obs. This function was tested using the GTFS of Las Vegas, USA, downloaded on Oc
 ```
 
 
+### Related projects which I still need to learn from:
 
-
+  - [Mateo Neira](https://mateoneira.github.io/) has similar project in `Pyhton`, [here](https://mateoneira.github.io//transport_networks/).
+ - [Tyler Green](http://www.tyleragreen.com/) has a similar project in `Java` [to study transit system design using graph theory](https://github.com/tyleragreen/gtfs-graph).
+ - Last but not least, [Manlio De Domenico](http://deim.urv.cat/~manlio.dedomenico/index.php) has created [MuxViz, which is well advanced platform for the visualization and the analysis of interconnected multilayer networks in `R`](https://github.com/manlius/muxViz).
