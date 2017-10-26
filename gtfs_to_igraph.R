@@ -285,7 +285,7 @@ nrow(df[ parent_station ==""])
     cat("building igraph \n")
   
   g <- graph_from_data_frame(relations, directed=TRUE, vertices=temp_stops)
-  return(g)
+  
   
   
   
@@ -296,7 +296,7 @@ nrow(df[ parent_station ==""])
 if (save_muxviz==T){ 
   
   # create directory where input files to muxviz will be saved
-  dir.create(file.path(".", "muxviz_input"))
+  dir.create(file.path(".", "muxviz_input"), showWarnings = FALSE)
   
   # stops
     names(temp_stops) <- c('nodeID', 'nodeLong', 'nodeLat')
@@ -318,8 +318,8 @@ if (save_muxviz==T){
                           col.names = F, sep = " "), by = route_type, .SDcols= cols_to_save]
     
   # create Input file
-    edge_files <- list.files(".", pattern="edge_list", full.names=F)
-    layout_file <- list.files(".", pattern="layout", full.names=F)
+    edge_files <- list.files("./muxviz_input", pattern="edge_list", full.names=F)
+    layout_file <- list.files("./muxviz_input", pattern="layout", full.names=F)
     
     input_file <- data.frame(a= edge_files, b = NA, c=layout_file)
     input_file$a <- input_file$a
@@ -327,6 +327,10 @@ if (save_muxviz==T){
     input_file$c <- input_file$c
     fwrite(x=input_file, file="./muxviz_input/input_Muxviz.txt" ,col.names = F, sep = ";" )
   }   
+  
+  # return graph
+  return(g)
+  
 }
 
 
