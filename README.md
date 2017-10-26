@@ -41,6 +41,11 @@ obs. This function was tested using the GTFS of Las Vegas, USA, downloaded on Oc
 ```
 
 
+### Next steps: looking for collaborators :)
+ - Allow the option whether graph is weighted by route frequency or by travel time
+ - Allow the option to build a multilayer network where each (route? or each transport mode?) is a different layer
+
+
 ### Related projects which I still need to learn from:
 
   - [Mateo Neira](https://mateoneira.github.io/) has similar project in `Pyhton`, [here](https://mateoneira.github.io//transport_networks/).
