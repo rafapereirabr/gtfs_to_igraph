@@ -219,6 +219,10 @@ nrow(df[ parent_station ==""])
   # make sure stop_sequence is numeric
   stop_times_edited[, stop_sequence := as.numeric(stop_sequence) ]
   
+  
+  # make sure stops are in the right sequence for each group (in this case, each group is a trip_id)
+  setorder(stop_times, trip_id, stop_sequence, route_id)
+  
   gc(reset = T)
 
   
