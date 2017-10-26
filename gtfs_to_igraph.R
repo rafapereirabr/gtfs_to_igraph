@@ -17,6 +17,7 @@ library(dplyr)
 library(magrittr)
 library(sp)
 library(geosphere)
+library(fasttime)
 
 
 
@@ -28,7 +29,7 @@ gtfs_to_igraph <- function( list_gtfs, dist_threshold, save_muxviz){
 
 ############ 0. read GTFS files   -----------------
 
-# list_gtfs= list_of_gtfs_feeds
+# list_gtfs= my_gtfs_feeds
 # dist_threshold = 30
 
   
@@ -221,7 +222,7 @@ nrow(df[ parent_station ==""])
   
   
   # make sure stops are in the right sequence for each group (in this case, each group is a trip_id)
-  setorder(stop_times, trip_id, stop_sequence, route_id)
+  setorder(stop_times_edited, trip_id, stop_sequence, route_id)
   
   gc(reset = T)
 
@@ -233,17 +234,28 @@ nrow(df[ parent_station ==""])
   cat("Identifying links between stops \n")
   
 
+  # calculate travel-time (in minutes) between stops
+    
+    # Convert times to POSIX to do calculations
+      stop_times_edited[, arrival_time :=   paste("2000-01-01",arrival_time)  ] # add full date. The date doesnt' matter much
+      stop_times_edited[, arrival_time :=   fastPOSIXct(arrival_time)  ] # fast conversion to POSIX
+    
+    # calculate travel time (in minutes) between stops 
+      stop_times_edited[ , travel_time := difftime( data.table::shift(arrival_time, type = "lead"), arrival_time, units="mins")  , by=trip_id][ , travel_time := as.numeric(travel_time) ]
+
+  
   # create three new columns by shifting the stop_id, arrival_time and departure_time of the following row up 
     # you can do the same operation on multiple columns at the same time
     stop_times_edited[, `:=`(stop_id_to = shift(stop_id, type = "lead"), 
                           arrival_time_stop_to = shift(arrival_time, type = "lead"),
-                          departure_time_stop_to = shift(departure_time, type = "lead")),
+                          departure_time_stop_to = shift(departure_time, type = "lead")
+                          ),
                    by = .(trip_id, route_id)]
       
   # you will have NAs at this point because the last stop doesn't go anywhere. Let's remove them
-  stop_times_edited <- na.omit(stop_times_edited) 
+    stop_times_edited <- na.omit(stop_times_edited) 
   
-  # get weight: frequency per route
+  # frequency of trips per route (weight)
     relations <- stop_times_edited[, .(weight = .N), by= .(stop_id, stop_id_to, route_id, route_type)]
     relations <- unique(relations)
     
