@@ -9,7 +9,7 @@ The workflow of the function is as follows:
  - Steps 1 to 3: Identify and merge stops that are closer than a distance threshold (meters). This threshold is set by the user
  - Step 4: Identify transport modes, route and service level for each trip
  - Step 5: Indentify links between stops
- - Step 6: Build igraph. As it stants, the script returns a graph weighted by route frequecy
+ - Step 6: Build igraph (L-space representation). As it stants, the script returns a graph with information on route frequecy and on travel time for each link that can be used to calculate weighted metrics 
  - Step 7 (optional): the script creates a subdirectory and saves the input files to use in [MuxViz](https://github.com/manlius/muxViz)
 
 
@@ -49,5 +49,6 @@ obs. This function was tested using the GTFS of Las Vegas, USA, downloaded on Oc
 ### Related projects which I still need to learn from:
 
   - [Mateo Neira](https://mateoneira.github.io/) has similar project in `Pyhton`, [here](https://mateoneira.github.io//transport_networks/).
+ - [Sandro Souza](https://twitter.com/sandrofsousa) has written a [Python script to study some properties and robustness of the public transport network of São Paulo](https://github.com/sandrofsousa/PTN). This was for his Masters dissertation, which it's available in Portuguese [here](https://www.researchgate.net/publication/304946197_Estudo_das_propriedades_e_robustez_da_rede_de_transporte_publico_de_Sao_Paulo)
  - [Tyler Green](http://www.tyleragreen.com/) has a similar project in `Java` [to study transit system design using graph theory](https://github.com/tyleragreen/gtfs-graph).
  - Last but not least, [Manlio De Domenico](http://deim.urv.cat/~manlio.dedomenico/index.php) has created [MuxViz, which is well advanced platform for the visualization and the analysis of interconnected multilayer networks in `R`](https://github.com/manlius/muxViz).
