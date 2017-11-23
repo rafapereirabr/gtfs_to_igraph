@@ -9,7 +9,7 @@ The workflow of the function is as follows:
  - Steps 1 to 3: Identify and merge stops that are closer than a distance threshold (meters). This threshold is set by the user
  - Step 4: Identify transport modes, route and service level for each trip
  - Step 5: Indentify links between stops
- - Step 6: Build igraph (L-space representation). As it stants, the script returns a graph with information on route frequecy and on travel time for each link that can be used to calculate weighted metrics 
+ - Step 6: Build igraph (L-space representation). As it stands, the script returns a graph with information on route frequecy and on travel time for each link that can be used to calculate weighted metrics 
  - Step 7 (optional): the script creates a subdirectory and saves the input files to use in [MuxViz](https://github.com/manlius/muxViz)
 
 
